@@ -5,10 +5,10 @@ from django.db import models
 #Models ----------------------------------------------------------------
 class Post(models.Model):
     Titulos = models.CharField(max_length=100)
-    subtitulo = models.CharField()
-    image = models.CharField()
-    cuerpo = models.CharField()
-    autor = models.CharField()
+    subtitulo = models.CharField(max_length=200)
+    image = models.CharField(max_length=100)
+    cuerpo = models.TextField()
+    autor = models.CharField(max_length=100)
     fecha = models.DateField()
 
 class Autor (models.Model):

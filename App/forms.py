@@ -10,7 +10,7 @@ class Post(forms.Form):
     autor = forms.CharField()
     fecha = forms.DateField()
 
-class Autor (forms.Model):
+class Autor (forms.Form):
     nombre = forms.CharField()
     apellido = forms.CharField()
 

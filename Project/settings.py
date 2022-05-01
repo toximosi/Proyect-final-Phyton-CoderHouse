@@ -55,7 +55,7 @@ ROOT_URLCONF = 'Project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/Volumes/Hiwan/SynologyDrive/Coderhouse/Python/Proyecto/django/Blog/App/templates'],
+        'DIRS': ['/Volumes/Hiwan/SynologyDrive/Coderhouse/Python/Proyecto/django/Blog/App/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

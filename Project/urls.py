@@ -6,5 +6,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     #vistas-------------------------------------
-    path('', include('App.urls')),
+    path('App/', include('App.urls')),
 ]

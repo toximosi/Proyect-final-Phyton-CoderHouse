@@ -1,4 +1,5 @@
 #Importaciones ------------------------------------------------------
+from dataclasses import fields
 from multiprocessing import context
 from django.shortcuts import render, HttpResponse
 from django.http import HttpResponse
@@ -22,73 +23,56 @@ from django.urls import reverse_lazy
 def index(request):
     return render(request, 'index.html')
 
-""" def autor(request):
-    return render(request, 'autor.html') """
-
 def login(request):
-    return render(request, 'section/login.html')
+    return render(request, 'App/section/login.html')
 
 def signup(request):
-    return render(request, 'section/signup.html')
+    return render(request, 'App/section/signup.html')
 
 def profile(request):
-    return render(request, 'section/profile/profile.html')
+    return render(request, 'App/section/profile/profile.html')
 
 def mesages(request):
-    return render(request, 'section/mesages.html')
+    return render(request, 'App/section/mesages.html')
 
 def about(request):
-    return render(request, 'section/about.html')
+    return render(request, 'App/section/about.html')
 
 def error(request):
-    return render(request, 'section/404.html')
+    return render(request, 'App/section/404.html')
 
 #!POST----------------------------------------------------------
 def post(request):
     return render(request, 'section/post/post.html')
-#*CRUD: CBV -- mediante DJANGO ------------------------------------------------------------------
-def postLV(ListView):
+#
+# *CRUD: CBV -- mediante DJANGO ------------------------------------------------------------------
+class postLV(ListView):
     model = Post
-    template_name = "section/post/post.html"
+    template_name = "section/post/post_list.html"
 
-def postDV(DetailView):
+# Read: Lectura ----------------------------------
+class postDV(DetailView):
     model = Post
-    template_name = "section/post/post.html"
-
-def postCV(CreateView):
-    model = Post
-    sucess_url = "section/post/list"
-    files = ["titulo", "subtitulo", "image", "cuerpo", "autor", "fecha"]
-
-def postUV(UpdateView):
-    model = Post
-    sucess_url = "section/post/list"
-    files = ["titulo", "subtitulo", "image", "cuerpo", "autor", "fecha"]
-
-def postDV(DeleteView):
-    model = Post
-    sucess_url = "section/post/list"
-
-
- # Read: Lectura ----------------------------------
-""" def post(request):
-
-    return render (request, "section/post/post.html") """ #Enviamos datos a la vista html
+    template_name = "section/post/post_detail.html"
 
 # Create: Crear ----------------------------------
-def postCreate(request):
-
-    return render(request, "section/post/post.html")
+class postCV(CreateView):
+    model = Post
+    success_url = "/post/list"
+    fields = ["titulo", "subtitulo", "image", "cuerpo", "autor", "fecha"]
 
 # Delete: Borrar --------------------------------------
-def postDelete(request, idF):
-
-    return render(request, "section/post/post.html")
+class postDeV(DeleteView):
+    model = Post
+    template_name = "section/post/post_confirm_delete.html"
+    success_url = "/post/list"
 
 # Update: Actualizar ----------------------------------
-def postUpdate(request, idF):
-
-    return render(request,"section/post/post.html")   
+class postUV(UpdateView):
+    model = Post
+    template_name = "section/post/post_form.html"
+    sucess_url = "/App/post/list"
+    fields = ["titulo", "subtitulo", "image", "cuerpo", "autor", "fecha"]
 
 #!Autores----------------------------------------------------------
 #*CRUD -- mediante PYTHON ------------------------------------------------------------------
@@ -106,10 +90,10 @@ def autorCreate(request):
             info = myForm.cleaned_data
             autor = Autor (nombre = info["nombre"], apellido = info["apellido"])
             autor.save()
-            return render(request, "section/autor.html")#redirigo la web a donde quiera
+            return render(request, "App/section/autor.html")#redirigo la web a donde quiera
     else:
         miFormulario = AutorForm()#Formulario vacio para construir el html
-    return render(request, "section/autor.html", {"myForm":myForm})
+    return render(request, "App/section/autor.html", {"myForm":myForm})
 
 # Delete: Borrar --------------------------------------
 def autorDelete(request, idF):
@@ -132,22 +116,22 @@ def autorUpdate(request, idF):
             autor.apellido = info['apellido']
 
             autor.save()
-            return render(request, "section/autor.html")
+            return render(request, "App/section/autor.html")
     else:
         myForm=AutorForm( initial = {"nombre":autor.nombre, "apellido":autor.apellido})
-    return render(request,"section/autor.html", {"myForm":myForm, "autor_id":idF })
+    return render(request,"App/section/autor.html", {"myForm":myForm, "autor_id":idF })
 
 """ def autorResultados(request):
     if request.GET["fname"]:
         nombre =request.GET['fname']
         estudiantes = Autor.objects.filter(nombre__icontains=nombre)
-        return render(request, "autor.html", {"autor":autor, "query":nombre })
+        return render(request, "App/autor.html", {"autor":autor, "query":nombre })
     else:
         respuesta = "No enviaste datos"
     return HttpResponse(respuesta) """
 
 """ def autorBuscador(request):
-    return render(request, "autor.html",) """
+    return render(request, "App/autor.html",) """
 
 """ def autorFormulario(request):
     if request.method == 'POST':

@@ -1,39 +1,41 @@
 {% extends "../../parent.html" %} {% load static %} {% block contenidoQueCambia %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>Detalle del Post</h1>
 
-<h1>Detalle del Post</h1>
-
-<table>
-<tr>
-    <td>id</td>
-    <td>{{ post.id }}</td>
-</tr>
-<tr>
-    <td>fecha</td>
-    <td>{{ post.fecha }}</td>
-</tr>
-<tr>
-    <td>titulo</td>
-    <td>{{ post.titulo }}</td>
-</tr>
-<tr>
-    <td>subtitulo</td>
-    <td>{{ post.subtitulo }}</td>
-</tr>
-<tr>
-    <td>image</td>
-    <td>{{ post.image }}</td>
-</tr>
-<tr>
-    <td>cuerpo de texto</td>
-    <td>{{ post.cuerpo }}</td>
-</tr>
-<tr>
-    <td>autor</td>
-    <td>{{ post.autor }}</td>
-</tr>
-</table>
-<p>
-    <a href="{% url 'list' %}">Regresar</a>"
-</p>
-
+      <table>
+        <tr>
+          <td>id</td>
+          <td>{{ post.id }}</td>
+        </tr>
+        <tr>
+          <td>fecha</td>
+          <td>{{ post.fecha }}</td>
+        </tr>
+        <tr>
+          <td>titulo</td>
+          <td>{{ post.titulo }}</td>
+        </tr>
+        <tr>
+          <td>subtitulo</td>
+          <td>{{ post.subtitulo }}</td>
+        </tr>
+        <tr>
+          <td>image</td>
+          <td>{{ post.image }}</td>
+        </tr>
+        <tr>
+          <td>cuerpo de texto</td>
+          <td>{{ post.cuerpo }}</td>
+        </tr>
+        <tr>
+          <td>autor</td>
+          <td>{{ post.autor }}</td>
+        </tr>
+      </table>
+      <p><a href="{% url 'list' %}">Regresar</a>"</p>
+    </div>
+  </div>
+</div>
 {% endblock %}

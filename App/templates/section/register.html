@@ -1,0 +1,17 @@
+{% extends "../parent.html" %} {% load static %} {% block contenidoQueCambia %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h1>Register</h1>
+        <form action="" method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+        </form>
+
+        <button type="submit">Registrarse</button>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

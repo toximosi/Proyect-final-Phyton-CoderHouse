@@ -1,10 +1,12 @@
 {% extends "../../parent.html" %} {% load static %} {% block contenidoQueCambia %}
-
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <imput type="submit" value="enviar">
-</form>
-
+    <div class="container">
+        <div class="row">
+        <div class="col-12">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <imput type="submit" value="enviar">
+                </form>
+    </div></div></div>
 {% endblock %}
 

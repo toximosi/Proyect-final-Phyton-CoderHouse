@@ -12,6 +12,9 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+#login-------------------------------------------------------------------
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
 
 
 
@@ -22,12 +25,6 @@ from django.urls import reverse_lazy
 #*NOTE: la información que se pasa al template
 def index(request):
     return render(request, 'index.html')
-
-def login(request):
-    return render(request, 'App/section/login.html')
-
-def signup(request):
-    return render(request, 'App/section/signup.html')
 
 def profile(request):
     return render(request, 'App/section/profile/profile.html')
@@ -41,11 +38,46 @@ def about(request):
 def error(request):
     return render(request, 'App/section/404.html')
 
-#!POST----------------------------------------------------------
+#!LOGIN---------------------------------------------------------------------
+
+def login_request(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data = request.POST)
+        if form.is_valid():
+            u = form.cleaned_data.get("username")
+            p = form.cleaned_data.get("password")
+
+            user = authenticate(username = u, password = p)
+            
+            if user is not None:
+                login (request, user)
+                return render(request, "index.html")
+            else:
+                return render(request, "index.html")
+        else:
+            return render(request, "index.html")
+
+    form = AuthenticationForm()
+    return render(request, 'section/login.html', {"form":form})
+
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        #form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            u = form.cleaned_data["username"]
+            form.save()
+            return render(request, "index.html")
+    else:
+        form = UserCreationForm()
+        """ form = UserRegisterForm() """
+    return render(request, "section/register.html", {"form":form})
+
+#!POST---------------------------------------------------------------------
 def post(request):
     return render(request, 'section/post/post.html')
 #
-# *CRUD: CBV -- mediante DJANGO ------------------------------------------------------------------
+# *CRUD: CBV -- mediante DJANGO -------------------------------------------
 class postLV(ListView):
     model = Post
     template_name = "section/post/post_list.html"
@@ -146,3 +178,5 @@ def autorUpdate(request, idF):
     else:
         miFormulario = autorFormulario()
     return render(request,"autorFormulario.html", {"miFormulario":miFormulario}) """
+
+

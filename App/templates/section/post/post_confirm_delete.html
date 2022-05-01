@@ -1,8 +1,12 @@
 {% extends "parent.html" %} {% load static %} {% block contenidoQueCambia %}
-
-<form action="">
-    ¿estas seguro que deseas borrar el post "{{ object}}"?
-    <imput type="submit" value="borrar"/>
-</form>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+            <form action="">
+                ¿estas seguro que deseas borrar el post "{{ object}}"?
+                <imput type="submit" value="borrar" />Borrar</div>
+            </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

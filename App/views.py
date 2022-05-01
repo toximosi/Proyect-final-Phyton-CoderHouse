@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.template import Template, Context
 from django.template import loader
 from App.models import Post, Autor
-from App.forms import PostForm, AutorForm
+from App.forms import PostForm, AutorForm, UserRegisterForm
 #importaciones LISVIEW - Clases Basadas en Vistas - CRUD ----------------
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
@@ -62,15 +62,15 @@ def login_request(request):
 
 def register(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        #form = UserRegisterForm(request.POST)
+        #form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             u = form.cleaned_data["username"]
             form.save()
             return render(request, "index.html")
     else:
-        form = UserCreationForm()
-        """ form = UserRegisterForm() """
+        #form = UserCreationForm()
+        form = UserRegisterForm()
     return render(request, "section/register.html", {"form":form})
 
 #!POST---------------------------------------------------------------------

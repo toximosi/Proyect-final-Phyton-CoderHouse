@@ -21,5 +21,5 @@ urlpatterns = [
     #login -------------------------------------------------------
     path("login", views.login_request, name="login"),
     path("register", views.register, name="register"),
-    path("logout", LogoutView.as_view, name="Logout"),
+    path("logout", LogoutView.as_view(template_name="section/logout.html"), name="Logout"),
 ]

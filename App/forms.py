@@ -2,7 +2,7 @@
 from django import forms 
 
 #code----------------------------
-class Post(forms.Form):
+class PostForm (forms.Form):
     titulos = forms.CharField()
     subtitulo = forms.CharField()
     image = forms.CharField()
@@ -10,7 +10,7 @@ class Post(forms.Form):
     autor = forms.CharField()
     fecha = forms.DateField()
 
-class Autor (forms.Form):
+class AutorForm (forms.Form):
     nombre = forms.CharField()
     apellido = forms.CharField()
 

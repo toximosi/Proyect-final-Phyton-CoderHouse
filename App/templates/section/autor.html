@@ -1,11 +1,95 @@
-{% extends "../parent.html" %} {% load static %} {% block contenidoQueCambia %}
+{% extends "parent.html" %} {% load static %} {% block contenidoQueCambia %}
+<div class="container autor">
+  <div class="row">
+    <div class="col-12"><h1>Autores</h1></div>
+  </div>
+  <div class="row">
+    <!-- Tabla de muestra de información -->
+    <div class="col-7">
+      <h3>Lista de autores</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col" style="text-align: center"></th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col" style="text-align: center"></th>
+            <th scope="col" style="text-align: center"></th>
+            <th scope="col" style="text-align: center"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for a in autor %}
+          <tr>
+            <th scope="row">{{a.id}}</th>
+            <td style="text-align: center">
+              <i class="fa-solid fa-user-astronaut"></i>
+            </td>
 
-
-
-
-
-
-
-
-
+            <td>{{a.nombre}}</td>
+            <td>{{a.apellido}}</td>
+            <td style="text-align: center">
+              <a href=""><i class="fa-solid fa-eye"></i></a>
+            </td>
+            <td style="text-align: center">
+              <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+            </td>
+            <td style="text-align: center">
+              <a href="{% url 'autorDelete' a.id %}"><i class="fa-solid fa-trash-can"></i></a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <!-- Formulario de creación de autor -->
+    <div class="col-4 offset-md-1">
+      <div>
+        <h3>Buscar Autor</h3>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            id="buscar"
+            placeholder="buscar"
+            name="buscar"
+          />
+          <button class="btn btn-outline-secondary" type="button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
+      <div>
+        <h3>Crear autor</h3>
+        <form action="/AutorForm/" method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nombre"
+              placeholder="nombre"
+              name="nombre"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Apellido</label>
+            <input
+              type="text"
+              class="form-control"
+              id="apellido"
+              placeholder="apellido"
+              name="apellido"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">
+            Crear
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
